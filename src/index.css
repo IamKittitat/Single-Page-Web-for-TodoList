@@ -2,7 +2,6 @@
 /* CSS Document */
 
 .body{
-position: relative;
 width: 100%;
 height: 100%;
 z-index:-1;
@@ -65,36 +64,38 @@ margin-right: auto;
 }
 .add-btn{
 position: relative;
-display: flex;	
+display: flex;
+flex-direction: row;
 width: 103px;
 height: 50px;
-text-align: center;
+
 background: #ABDBE6;
-border-radius: 20px;
-	
-font-family: 'Poppins';
-font-style: normal;
-font-weight: 400;
-font-size: 20px;
-line-height: 30px;
+border-radius: 20px;	
+}
+.add-btn-plus{
+position: relative;
+left :10px;
+top:10px;
 	
 }
-/*.add-txt{
+.add-btn-addtxt{
 position: relative;
-
-width: 103px;
-height: 50px;
-margin: auto;
+left :15px;
+top:10px;
+	
 font-family: 'Poppins';
 font-style: normal;
 font-weight: 400;
 font-size: 20px;
 line-height: 30px;
-text-align: center;
+/* identical to box height */
+
 
 color: #000000;
+
+	
 }
-*/
+
 .filter-btn{
 position: relative;
 display: flex;	
@@ -102,7 +103,6 @@ width: 30px;
 height: 30px;
 background: url(assets/images/image_2.png);
 }
-
 .line1{
 position: absolute;
 width: 100%;
@@ -114,26 +114,202 @@ border: 2px solid #7FBAC7;
 transform: rotate(0.04deg);
 }
 
+
 .main-body{
-position: absolute;
+position: relative;
 display: flex;
 flex-direction: column;
+
 gap: 10px;
-}
-.upcoming-group{
-	position: absolute;
-	display: flex;
-	gap: 10px;
-	flex-direction: column;
-   width: 80%;
-  height: 50%;
-  margin-left: 334px;
+margin-left: 350px;
+margin-right: 350px;
 margin-top: 125px;
+}
+
+.add-task-card{
+position: relative;
+display: flex;
+flex-direction: column;
+width: 100%;
+height: 300px;
+
+background: #E5E5E5;
+border-radius: 20px;
+/*margin-left: 100px;
+margin-top: 25px;*/
+top :25px;
+
+}
+.add-task-taskname-box{
+	/* Rectangle 4 */
+
+
+position:relative;
+width: 726px;
+height: 42px;
+top:10px;
+left: 20px;
+
+background: #DDDDDD;
+border: 2px solid #FFFFFF;
+box-sizing: border-box;
+border-radius: 13px;
+	
+	
+/*text*/
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 300;
+font-size: 30px;
+line-height: 45px;
+
+
+color: #000000;
+}
+.add-task-taskname-duedate-txt{
+	position: relative;
+width: 66px;
+height: 20px;
+left:20px;
+top:10px;
+
+
 font-family: 'Poppins';
 font-style: normal;
 font-weight: 400;
-font-size: 20px;
-line-height: 30px;
+font-size: 13px;
+line-height: 20px;
+/* identical to box height */
+
+
+color: #000000;
+}
+.add-task-taskname-detail-txt{
+	position: relative;
+width: 38px;
+height: 20px;
+left:20px;
+top:20px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 13px;
+line-height: 20px;
+/* identical to box height */
+
+text-decoration-line: underline;
+
+color: #000000;
+
+}
+.selected-date{
+position:relative;
+width: 200px;
+height: 24px;
+left: 20px;
+top: 10px;
+
+
+background: #DDDDDD;
+border: 2px solid #FFFFFF;
+box-sizing: border-box;
+border-radius: 20px;
+}
+.input-detail{
+position: relative;
+width: 95%;
+height: 20%;
+left: 20px;
+top: 30px;
+
+background: #DDDDDD;
+border: 2px solid #FFFFFF;
+box-sizing: border-box;
+border-radius: 20px;
+}
+.tasktype-dropdown{
+
+position: relative;
+width: 25%;
+height: 20px;
+left: 20px;
+top: 30px;
+
+background: #E5E5E5;
+border: 2px solid #F2BCBC;
+box-sizing: border-box;
+border-radius: 20px;
+}
+.add-submit-group{
+	
+	right: 20px;
+	position: relative;
+	display: flex;
+	top :45px;
+	column-gap: 10px;
+	justify-content: flex-end;
+}
+.add-submit-btn{
+position: relative;
+width: 10%;
+height: 28px;
+
+
+background: #DDDDDD;
+border: 2px solid #5CA066;
+box-sizing: border-box;
+border-radius: 20px;
+justify-content:center;
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 300;
+font-size: 13px;
+line-height: 20px;
+/* identical to box height */
+
+text-align: center;
+
+color: #000000;
+}
+.cancle-btn{
+position: relative;
+width: 10%;
+height: 28px;
+
+
+background: #DDDDDD;
+border: 2px solid red;
+box-sizing: border-box;
+border-radius: 20px;
+justify-content:center;
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 300;
+font-size: 13px;
+line-height: 20px;
+/* identical to box height */
+
+text-align: center;
+
+color: #000000;
+}
+
+
+
+.upcoming-group{
+
+	display: flex;
+	gap: 10px;
+	flex-direction: column;
+  /*margin-left: 100px;
+  margin-top: 100px;*/
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 30px;
+  margin-top: 20px;
 /* identical to box height */
 
 
@@ -142,18 +318,21 @@ color: #000000;
 
 
 .Task-box{
-	position: absolute;
-  display: flex;
-  flex-direction: column;
-	width: 772px;
-    height: 200px;
+  	position: relative;
+	display: flex;
+  	flex-direction: column;
+	width: 100%;
+	
 	background: #E5E5E5;
     border-radius: 20px;
+	
 }
+
+
 .Task-header{
 position: absolute;
-	margin-top: 10px;
-	margin-left: 20px;
+margin-top: 10px;
+margin-left: 20px;
 width: 171px;
 height: 45px;
 	display: flex;
@@ -164,6 +343,8 @@ font-weight: 400;
 font-size: 30px;
 line-height: 45px;
 /* identical to box height */
+	
+	
 
 
 color: #000000;
@@ -233,46 +414,52 @@ line-height: 20px;
 
 color: #000000;
 }
-.detail{
 
-position: absolute;
-width: 173px;
-height: 40px;
-	margin-top: 100px;
-	margin-left: 25px;
+.detail-header{
+position: relative;
+width: 100%;
+height: 20px;
 font-family: 'Poppins';
 font-style: normal;
 font-weight: 400;
 font-size: 13px;
 line-height: 20px;
+text-decoration-line: underline;
+left: 25px;
+color: #000000;
+	
+}
 
+.detail{
+position: relative;
+font-family: 'Poppins';
+font-style: normal;
+width: 100%;
+height: 50%;
+font-weight: 400;
+font-size: 13px;
+line-height: 20px;
+left: 25px;
 color: #000000;
 	
 }
 
 .line2{
-	/* Line 2 */
-
-
-position: absolute;
+position: relative;
 width: 772px;
 height: 0px;
-margin-left: 334px;
-margin-top: 645px;
 
 border: 1px solid #7FBAC7;
 
 }
 
 .passed-group{
-	position: absolute;
+	position: relative;
 	display: flex;
 	gap: 10px;
 	flex-direction: column;
-   width: 80%;
-  height: 50%;
-margin-left: 334px;
-margin-top: 660px;
+
+	
 font-family: 'Poppins';
 font-style: normal;
 font-weight: 400;
@@ -283,6 +470,7 @@ line-height: 30px;
 
 color: #9A1616;
 }
+
 
 
 

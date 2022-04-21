@@ -28,43 +28,89 @@
 		<div class="Header-txt">Todo List</div>
 	  <div class="Header-group-btn">
 			<img src="assets/images/info_btn.png" width="30" height="30" alt="filter">
-			<div class="add-btn" align="center"><img src="assets/images/image_1.png" width="30" height="30" alt="filter" > ADD</div>
+			<div class="add-btn">
+		  	<div class="add-btn-plus"><img src="assets/images/image_1.png" width="30" height="30" alt="filter" ></div>
+			<div class="add-btn-addtxt">ADD</div>
+		  
+		  </div>
 			<img src="assets/images/image_2.png" width="30" height="30" alt="filter">
 		</div>
 		
 		<div class="line1"></div>
 		<div class="main-body">
+		<div class="add-task-card">
+			<input type="text" class="add-task-taskname-box" placeholder=" Taskname">
+			<div class="add-task-taskname-duedate-txt">Due Date:</div>
+			
+			<input type="date" class="selected-date">
+			<div class="add-task-taskname-detail-txt">Detail</div>
+			
+			 <input type="text" class="input-detail" placeholder=" Detail"><br>
+			 <select name="tasktype" class="tasktype-dropdown">
+			<option value="" selected disabled hidden>Select TaskType Here</option>
+			  <option value="Activity">Activity</option>
+			  <option value="Quiz<">Quiz</option>
+			  <option value="Meeting">Meeting</option>
+			  <option value="Deadline">Deadline</option>
+			</select>
+			
+			<div class="add-submit-group">
+			<input type="submit" value="Add" class="add-submit-btn">
+			<input type="submit" value="Cancle" class="cancle-btn">
+			</div>
+			
+			
+        </div>
+			
+			
 		<div class="upcoming-group"> 
-		Upcoming
-			
-			
+	      Upcoming<br>
 			<!-- Task1 -->
-			<div class="Task-box">
-			<div class="Task-header"> TheTask1
-				<div class="Task-type">TaskType</div>
+	      <div class="Task-box">
+			<div class="Task-header"> TheTask1&nbsp; &nbsp; &nbsp;
+<div class="Task-type">TaskType</div>
 				<div class="edit-del-group">
 				<div class="edit-del-txt">edit</div>
 				<div class="edit-del-txt">delete</div>
 				</div>
 				</div>
 			<div class="due-date"> Due date xx/xx/xx</div>
-			<div class="detail">Hello sawasdee
-				
+			<div class="detail-header">Detail</div>
+			<div class="detail">Hello sawasdee<br>
+				Pmai<br>
 				</div>
 			
 			</div>
 			<!-- Task1 -->
 			
 			
-			<!-- Task2 -->
-			
-			<!-- Task2 -->
 
 		</div>
 			
 		<div class="line2"></div>	
 		<div class="passed-group">
 			Passed
+			<div class="Task-box">
+			<div class="Task-header"> TheTaskNumber2
+<div class="Task-type">TaskType</div>
+				<div class="edit-del-group">
+				<div class="edit-del-txt">edit</div>
+				<div class="edit-del-txt">delete</div>
+				</div>
+			  </div>
+			<div class="due-date" style="color: red"> Due date xx/xx/xx</div>
+			<div class="detail-header">Detail</div>
+			<div class="detail">Science<br>
+				
+				Math<br>
+				CP<br>
+				Calculus<br>
+				
+				</div>
+			
+			</div>
+			
+			
 			</div>
 		</div>
 		
