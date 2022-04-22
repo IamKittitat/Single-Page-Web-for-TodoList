@@ -37,7 +37,7 @@ const editButton = document.getElementById("edit-todo");
 const editForm = document.getElementById("edit-form");
 
 const borderColor = {
-    Deadline: "#A8E4B1",
+    Deadline: "#0b7e1c",
     Exam: "#DA5C53",
     Meeting: "#4AA3BA",
     Activity: "#8D5AB5"

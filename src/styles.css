@@ -191,7 +191,7 @@ input[type=radio]{
 }
 
 .deadline-label{
-    border: 2px solid #A8E4B1;
+    border: 2px solid #0b7e1c;
 }
 
 .type-selector input[type=radio]:checked + label {
@@ -211,7 +211,7 @@ input[type=radio]{
 }
 
 .type-selector input[type=radio]:checked + .deadline-label {
-    background-color: #A8E4B1;
+    background-color: #0b7e1c;
 }
 
 /* End Of Label and Checked Label */
