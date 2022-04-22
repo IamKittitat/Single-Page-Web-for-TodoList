@@ -261,12 +261,14 @@ async function clickINFO() {
 async function showEdit(docId) {
     console.log(docId);
     console.log("clickedEDIT");
+    const editingID = document.getElementById("editing-id");
 
     const docRef = await doc(db, `Todos/${docId}`);
     let docInstance = await getDoc(docRef);
     docInstance = docInstance.data();
-
-    if (!editIsClicked) {
+    console.log(editingID.innerHTML + " ..  " + docId)
+    if (!editIsClicked || (editIsClicked && (editingID.innerHTML != docId))) {
+        editingID.innerHTML = docId;
         hideForm();
         editForm.style.display = "flex";
         editIsClicked = true;
@@ -429,6 +431,8 @@ function sortTodosByDate(items) {
     sortedTodos.sort((a, b) => (a.date > b.date) ? 1 : ((b.date > a.date) ? -1 : 0))
     return sortedTodos
 }
+
+
 
 // =======================================================
 
