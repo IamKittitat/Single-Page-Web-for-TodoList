@@ -1,123 +1,144 @@
-<!doctype html>
-<html prefix="og: http://ogp.me/ns#" lang="en" style="height: 100%">
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-<title>Main</title>
-	
-<meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
-
-  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=5" />
-
-
-  <meta name="description" content="index Description">
-  <meta property="og:title" content="index">
-  <meta property="og:description" content="index Description">
-  <meta name="generator" content="Quest">
-
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:400">
-  <link rel="stylesheet" href="index.css">
-    
-      <script src="index.js"></script>	
-	
-	
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css" />
+    <title>Todo List</title>
 </head>
+<!-- I have named all the function-name in this html but you can change it to what ever you like -->
+<!-- my html/css skill is very very bad (also with my eng skill) (also with my PM skill), so this is NOT the best practices for building the web -->
+<!-- real backend/frontend work is much more fun and enjoyable than this. trust me! -->
 
 <body>
-	<div class="Header">
-		<div class="Header-txt">Todo List</div>
-	  <div class="Header-group-btn">
-			<img src="assets/images/info_btn.png" width="30" height="30" alt="filter">
-			<div class="add-btn">
-		  	<div class="add-btn-plus"><img src="assets/images/image_1.png" width="30" height="30" alt="filter" ></div>
-			<div class="add-btn-addtxt">ADD</div>
-		  
-		  </div>
-			<img src="assets/images/image_2.png" width="30" height="30" alt="filter">
-		</div>
-		
-		<div class="line1"></div>
-		<div class="main-body">
-		<div class="add-task-card">
-			<input type="text" class="add-task-taskname-box" placeholder=" Taskname">
-			<div class="add-task-taskname-duedate-txt">Due Date:</div>
-			
-			<input type="date" class="selected-date">
-			<div class="add-task-taskname-detail-txt">Detail</div>
-			
-			 <input type="text" class="input-detail" placeholder=" Detail"><br>
-			 <select name="tasktype" class="tasktype-dropdown">
-			<option value="" selected disabled hidden>Select TaskType Here</option>
-			  <option value="Activity">Activity</option>
-			  <option value="Quiz<">Quiz</option>
-			  <option value="Meeting">Meeting</option>
-			  <option value="Deadline">Deadline</option>
-			</select>
-			
-			<div class="add-submit-group">
-			<input type="submit" value="Add" class="add-submit-btn">
-			<input type="submit" value="Cancle" class="cancle-btn">
-			</div>
-			
-			
+    <!-- !!! Navbar of the web !!!!! -->
+    <div class="navbar">
+        <div class="left-navbar">
+            <h1>Todo List</h1>
         </div>
-			
-			
-		<div class="upcoming-group"> 
-	      Upcoming<br>
-			<!-- Task1 -->
-	      <div class="Task-box">
-			<div class="Task-header"> TheTask1&nbsp; &nbsp; &nbsp;
-<div class="Task-type">TaskType</div>
-				<div class="edit-del-group">
-				<div class="edit-del-txt">edit</div>
-				<div class="edit-del-txt">delete</div>
-				</div>
-				</div>
-			<div class="due-date"> Due date xx/xx/xx</div>
-			<div class="detail-header">Detail</div>
-			<div class="detail">Hello sawasdee<br>
-				Pmai<br>
-				</div>
-			
-			</div>
-			<!-- Task1 -->
-			
-			
-
-		</div>
-			
-		<div class="line2"></div>	
-		<div class="passed-group">
-			Passed
-			<div class="Task-box">
-			<div class="Task-header"> TheTaskNumber2
-<div class="Task-type">TaskType</div>
-				<div class="edit-del-group">
-				<div class="edit-del-txt">edit</div>
-				<div class="edit-del-txt">delete</div>
-				</div>
-			  </div>
-			<div class="due-date" style="color: red"> Due date xx/xx/xx</div>
-			<div class="detail-header">Detail</div>
-			<div class="detail">Science<br>
-				
-				Math<br>
-				CP<br>
-				Calculus<br>
-				
-				</div>
-			
-			</div>
-			
-			
-			</div>
-		</div>
-		
-		
-		
-	</div>
-	
-	
+        <div class="right-navbar">
+            <div class="info">
+                <img id="info" src="../image/info.png" onclick="clickINFO()" alt="group name" />
+            </div>
+            <div class="add-button" onclick="clickADD()">
+                <img src="../image/add.png" alt="add button" />
+                <div class="add-text">
+                    <p id="add-text">ADD</p>
+                </div>
+            </div>
+            <div class="filter">
+                <img id="filter" src="../image/filter.png" alt="filter button" />
+            </div>
+        </div>
+    </div>
+    <hr style="margin:auto;height:2px;width:97%;border-width:0;background-color:#7FBAC7">
+    <!-- !!!group name shown when click info button and hide when click it again !!!!! -->
+    <div id="group-name" class="group-name" style="display:none;">
+        <p>Jirayuwat Boonchan -> UX/UI Designer</p>
+        <p>Kittitat Tuntisak -> Project Manager</p>
+        <p>Ponnapat Darunaitorn -> Back End Developer</p>
+        <p>Tanakit Phentun -> Front End Developer</p>
+    </div>
+    <!-- !!!! edit-form show when clicked edit(of any todo element) AND also show data of clicked element !!!! -->
+    <div class="edit-form" id="edit-form">
+        <div class="task-name">
+            <input type="text" id="edit-task" placeholder="Task name." />
+        </div>
+        <div class="due-date">
+            <label for="due-date">Due date:</label>
+            <input type="date" id="edit-due-date">
+        </div>
+        <div class="detail">
+            <label for="detail">Detail</label>
+            <textarea id="edit-detail" rows="4" cols="40" placeholder="Task's details"></textarea>
+        </div>
+        <div class="input-footer">
+            <div class="type-selector">
+                <input type="radio" name="edit-type-check" id="edit-Activity" value="Activity" />
+                <label for="edit-Activity" class="activity-label">Activity</label>
+                <input type="radio" name="edit-type-check" id="edit-Meeting" value="Meeting" />
+                <label for="edit-Meeting" class="meeting-label">Meeting</label>
+                <input type="radio" name="edit-type-check" id="edit-Exam" value="Exam" />
+                <label for="edit-Exam" class="exam-label">Exam</label>
+                <input type="radio" name="edit-type-check" id="edit-Deadline" value="Deadline" />
+                <label for="edit-Deadline" class="deadline-label">Deadline</label>
+            </div>
+            <div class="todo-button-container">
+                <button id="edit-todo" style="cursor:pointer;" onclick="updateTodo()">EDIT</button>
+                <button id="cancel-edit-todo" style="cursor:pointer;" onclick="hideEdit()">cancel</button>
+            </div>
+        </div>
+        </form>
+        <p style="display:none" id="id-store"></p>
+    </div>
+    <!-- !!!! input shown when click ADD and hide when click it again !!!! -->
+    <!-- !!!! input form, edit form cant show together in the web (just only one) !!!! -->
+    <div class="input-form" id="input-form">
+        <div class="task-name">
+            <input type="text" id="task" placeholder="Task name." />
+        </div>
+        <div class="due-date">
+            <label for="due-date">Due date:</label>
+            <input type="date" id="due-date">
+        </div>
+        <div class="detail">
+            <label for="detail" style="text-decoration:underline;">Detail</label>
+            <textarea id="detail" rows="4" cols="40" placeholder="Task's details"></textarea>
+        </div>
+        <div class="input-footer">
+            <div class="type-selector">
+                <input type="radio" name="type-check" id="activity-radio" value="Activity" />
+                <label for="activity-radio" class="activity-label">Activity</label>
+                <input type="radio" name="type-check" id="Meeting-radio" value="Meeting" />
+                <label for="Meeting-radio" class="meeting-label">Meeting</label>
+                <input type="radio" name="type-check" id="Exam-radio" value="Exam" />
+                <label for="Exam-radio" class="exam-label">Exam</label>
+                <input type="radio" name="type-check" id="Deadline-radio" value="Deadline" />
+                <label for="Deadline-radio" class="deadline-label">Deadline</label>
+            </div>
+            <div class="todo-button-container">
+                <button id="add-todo" style="cursor:pointer;" onclick="addTodo()">DONE</button>
+                <button id="cancel-add-todo" style="cursor:pointer;" onclick="hideForm()">cancel</button>
+            </div>
+        </div>
+        </form>
+    </div>
+    <!-- !!!! Today task will show when load the page for the first time and will disappear when clicked ok !!!! -->
+    <!-- !!!! add data to today-task !!!! -->
+    <div id="today-task-container" class="today-task-container">
+        <div class="today-task-title">
+            <h2>Today's Task</h2>
+        </div>
+        <div class="today-task" id="today-task"></div>
+        <p id="ok" onclick="okTodayTask()">
+            OK</p>
+    </div>
+    <hr id="line-break-today" class="break-line"
+        style="margin:auto;height:2px;border-width:0;background-color:#7FBAC7;margin-top:13px;">
+    <!-- !!!! Upcoming will show task that due date is not today (need to {}.innerHTML += `<div something like in backend task>` to show data from database )!!!! -->
+    <!-- !!!! add data to upcomming-todo !!!! -->
+    <div class="upcoming-todo-container">
+        <div class="upcoming-title">
+            <h2>Up coming</h2>
+        </div>
+        <div class="upcoming-todo" id="upcoming-todo">
+        </div>
+    </div>
+    <hr class="break-line" style="margin:auto;height:2px;border-width:0;background-color:#7FBAC7;margin-top:13px;">
+    <!-- !!!! Show task that due date is passed ( {}.innerHTML+=  same as upcomming todo)!!!! -->
+    <!-- !!!! add data to passed-todo !!!! -->
+    <div id="passed-todo-container" class="passed-todo-container">
+        <div class="passed-title">
+            <h2>Passed</h2>
+        </div>
+        <div class="passed-todo" id="passed-todo"></div>
+    </div>
+    <!-- !!!! beware of js file name !!!! -->
+    <script type="module" src="index.js"></script>
 </body>
+
 </html>
+
+<!-- PS. you can plan the important function and web flow before coding or you will waste your time like me TT -->
