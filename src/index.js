@@ -406,7 +406,8 @@ function copyText(task, type, date, detail) {
     Task : ${task} , ${type}
     Date : ${date}
     Detail : ${detail}
-    ============= Have a happy Day!! ==============
+
+    Have a happy Day :D!! 
     `
     console.log(value)
     // console.log(copy);
