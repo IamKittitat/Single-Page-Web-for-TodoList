@@ -43,6 +43,8 @@ const borderColor = {
     Activity: "#8D5AB5"
 }
 
+// =======================================================
+
 async function getItems() {
     console.log("getItems");
 
@@ -220,18 +222,14 @@ async function updateTodo(docId) {
     }
 }
 
-function copyText(task, type, date, detail) {
-    console.log("copyText");
-    let value = `
-    ================== Todo List ==================
-    Task : ${task} , ${type}
-    Date : ${date}
-    Detail : ${detail}
-    ============= Have a happy Day!! ==============
-    `
-    console.log(value)
-    // console.log(copy);
-    navigator.clipboard.writeText(value)
+async function deleteTodo(id) {
+    if (confirm('Delete Todo from the Todo List?')) {
+        console.log('deleteTodo ' + id);
+        const docRef = doc(db, `Todos/${id}`);
+        await deleteDoc(docRef);
+        getItems();
+    }
+
 }
 
 async function clickADD() {
@@ -244,6 +242,18 @@ async function clickADD() {
     } else {
         inputForm.style.display = "none";
         addIsClicked = false;
+    }
+}
+
+async function clickINFO() {
+    console.log("clickedINFO");
+    const groupName = document.getElementById("group-name");
+    if (!infoIsClicked) {
+        groupName.style.display = "flex";
+        infoIsClicked = true;
+    } else {
+        groupName.style.display = "none";
+        infoIsClicked = false;
     }
 }
 
@@ -281,16 +291,11 @@ async function showEdit(docId) {
     }
 }
 
-async function clickINFO() {
-    console.log("clickedINFO");
-    const groupName = document.getElementById("group-name");
-    if (!infoIsClicked) {
-        groupName.style.display = "flex";
-        infoIsClicked = true;
-    } else {
-        groupName.style.display = "none";
-        infoIsClicked = false;
-    }
+async function okTodayTask() {
+    console.log("clickedOK");
+    const todayTask = document.getElementById("today-task-container");
+    todayTask.style.display = "none";
+    document.getElementById("line-break-today").style.display = "none";
 }
 
 async function hideForm() {
@@ -309,22 +314,8 @@ async function hideEdit() {
     redrawDOMedit();
 }
 
-async function okTodayTask() {
-    console.log("clickedOK");
-    const todayTask = document.getElementById("today-task-container");
-    todayTask.style.display = "none";
-    document.getElementById("line-break-today").style.display = "none";
-}
 
-async function deleteTodo(id) {
-    if (confirm('Delete Todo from the Todo List?')) {
-        console.log('deleteTodo ' + id);
-        const docRef = doc(db, `Todos/${id}`);
-        await deleteDoc(docRef);
-        getItems();
-    }
-
-}
+// ###################################
 
 function redrawDOMadd() {
     window.document.dispatchEvent(
@@ -408,6 +399,22 @@ function checkBlank() {
 function addColorType(id, type) {
     document.getElementById(id).style.borderColor = borderColor[type];
 }
+
+function copyText(task, type, date, detail) {
+    console.log("copyText");
+    let value = `
+    ================== Todo List ==================
+    Task : ${task} , ${type}
+    Date : ${date}
+    Detail : ${detail}
+    ============= Have a happy Day!! ==============
+    `
+    console.log(value)
+    // console.log(copy);
+    navigator.clipboard.writeText(value)
+}
+
+// =======================================================
 
 window.clickADD = clickADD;
 window.showEdit = showEdit;
