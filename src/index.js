@@ -67,7 +67,7 @@ async function getItems() {
                 todayTask.innerHTML += `
                 <div class="today-task-info" id="todo-${item.id}">
                     <div class="today-task-header">
-                        <h3 style="font-size:30px;">${item.task}</h3>
+                        <h3 class ="today-header">${item.task}</h3>
                         <p id="today-${item.id}-type" class="task-type">${item.type}</p>
                     </div>
                     <div class="today-task-due-date">

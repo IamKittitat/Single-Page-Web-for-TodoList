@@ -84,6 +84,10 @@
     
 }
 
+input[type="date"]::-webkit-calendar-picker-indicator {
+    margin-right: 10px;
+}
+
 #input-form, #edit-form{
     display: flex;
     background-color: #E5E5E5;
@@ -106,7 +110,7 @@ input[type=text], input[type=date]{
 }
 
 #task::placeholder {
-    padding-left: 40px;
+    padding-left: 0px;
     margin-left: 40px;
     color: #8A8A8A;
 }
@@ -356,7 +360,6 @@ input[type=radio]{
     justify-content: flex-start;
     align-items: center;    
     padding-left: 23px;
-    padding-top: 11px;
 }
 
 .task-type{
@@ -501,7 +504,6 @@ input[type=radio]{
         justify-content: flex-start;
         align-items: center;    
         padding-left: 23px;
-        padding-top: 11px;
     }
     
     .task-type{
@@ -561,7 +563,7 @@ input[type=radio]{
     }
 
     #task::placeholder {
-        padding-left: 40px;
+        padding-left: 0px;
         margin-left: 40px;
         color: #8A8A8A;
     }
@@ -634,12 +636,26 @@ input[type=radio]{
 }
 
 @media (max-width: 550px){
-    .navbar{
-        height: 7em;
-        flex-direction: column;
+
+    .today-task-header #today-header{
+        font-size: 15px;
     }
+
     .navbar .left-navbar h1{
-        font-size: 20px;
+        font-size: 10vw;
+    }
+
+    .navbar .right-navbar .add-button{
+        width: 80px;
+        height: 10vw;
+        font-size: 80%;
+        margin-left: 10px;
+        margin-right: 10px;
+        padding: 5px;
+    }
+    .navbar .right-navbar #info{
+        width: 20px;
+        height: 20px;
     }
     .break-line{
         width: 90%;
@@ -742,7 +758,6 @@ input[type=radio]{
         justify-content: flex-start;
         align-items: center;    
         padding-left: 23px;
-        padding-top: 11px;
     }
     
     .task-type{
