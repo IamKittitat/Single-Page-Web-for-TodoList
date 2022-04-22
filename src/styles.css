@@ -267,7 +267,6 @@ input[type=radio]{
 }
 
 .upcoming-todo-info,.passed-todo-info{ /*container of each upcoming todo*/
-    border:2px solid black;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -300,7 +299,6 @@ input[type=radio]{
     justify-content: flex-start;
     align-items: center;    
     padding-left: 23px;
-    padding-top: 11px;
 }
 
 .upcoming-right-header, .passed-right-header{
