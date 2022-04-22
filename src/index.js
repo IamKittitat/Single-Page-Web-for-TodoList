@@ -404,13 +404,13 @@ function addColorType(id, type) {
 function copyText(task, type, date, detail) {
     console.log("copyText");
     let value = `
-    ================== Todo List ==================
-    Task : ${task} , ${type}
-    Date : ${date}
-    Detail : ${detail}
+================== Todo List ==================
+Task : ${task} , ${type}
+Date : ${date}    
+Detail : ${detail}
 
-    Have a happy Day :D!! 
-    `
+Have a happy Day :D!! `
+
     console.log(value)
     // console.log(copy);
     navigator.clipboard.writeText(value)
