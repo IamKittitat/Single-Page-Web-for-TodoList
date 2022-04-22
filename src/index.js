@@ -21,21 +21,33 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore();
-const booksRef = collection(db, "tasks");
+const booksRef = collection(db, "Todos");
 
 // =======================================================
 
-var infoIsClicked = false;
-var addIsClicked = false;
-var editIsClicked = false;
+let infoIsClicked = false;
+let addIsClicked = false;
+let editIsClicked = false;
+const todayTask = document.getElementById("today-task");
+const upcoming = document.getElementById("upcoming-todo");
+const passed = document.getElementById("passed-todo");
+const passedTodoContainer = document.getElementById("passed-todo-container");
+const inputForm = document.getElementById("input-form");
+const editButton = document.getElementById("edit-todo");
+const editForm = document.getElementById("edit-form");
+
+const borderColor = {
+    Deadline: "#A8E4B1",
+    Exam: "#DA5C53",
+    Meeting: "#4AA3BA",
+    Activity: "#8D5AB5"
+}
 
 async function getItems() {
     console.log("getItems");
 
     const items = await getDocs(booksRef);
-    const todayTask = document.getElementById("today-task");
-    const upcoming = document.getElementById("upcoming-todo");
-    const passed = document.getElementById("passed-todo");
+
     todayTask.innerHTML = "";
     upcoming.innerHTML = "";
     passed.innerHTML = "";
@@ -50,81 +62,67 @@ async function getItems() {
 
             if (!(itemDate > todayDate) && !(itemDate < todayDate)) {
                 todayTask.innerHTML += `
-            <div id="${item.id}" class="today-task-info">
-                <div class="today-task-header">
-                    <h3>${item.data().task}</h3>
-                    <label class = "task-type">${item.data().type}</label>
+                <div class="today-task-info" id="todo-${item.id}">
+                    <div class="today-task-header">
+                        <h3 style="font-size:30px;">${item.data().task}</h3>
+                        <p id="today-${item.id}-type" class="task-type">${item.data().type}</p>
+                    </div>
+                    <div class="today-task-due-date">
+                        <p>Due date : ${toWeekday(itemDate) + ' ' + itemDate.getDate() + ' ' + toMonth(itemDate) + ' ' + itemDate.getFullYear()}</p>
+                    </div>
                 </div>
-                <div class="today-task-due-date">
-                    <label for="due-date">Due date:</label>
-                    <label class = "today-task-due-date">${toWeekday(itemDate) + ' ' + itemDate.getDate() + ' ' + toMonth(itemDate) + ' ' + itemDate.getFullYear()}</label>
-                </div>
-            </div>
             `;
-                `
-                <div id="${item.id}" class="today-task-info">
-                    <h3>${item.data().task}</h3>
-                    <label class = "task-type" >${item.data().type}</label>
-                    <label class = "today-task-due-date">${new Date(
-                    item.data().date
-                ).toLocaleDateString()}</label>
-                    <label>${item.data().detail}</label>
-                </div>
-                `;
+                addColorType(`today-${item.id}-type`, item.data().type)
             }
 
             if (!(itemDate < todayDate)) {
                 upcoming.innerHTML += `
-            <div id="${item.id}" class="upcoming-todo-info">
-                <div class="upcoming-header">
-                    <div class="upcoming-left-header">
-                        <h3>${item.data().task}</h3>
-                        <label class = "task-type">${item.data().type}</label>
-                    </div>
-                    <div class="upcoming-right-header">
-                        <p id="edit-button" onclick="clickEDIT('${item.id}');">edit</p>
-                        <p id="delete-button" onclick="deleteTodo('${item.id}');">Delete</p>
-                        <div class="copy">
-                            <img class="copy" src="../image/copy.png" onclick="copyTodo('${item.id}')" />
+                <div class="upcoming-todo-info" id="upcoming-${item.id}">
+                    <div class="upcoming-header">
+                        <div class="upcoming-left-header">
+                            <h3>${item.data().task}</h3>
+                            <p id="upcoming-${item.id}-type" class="task-type">${item.data().type}</p>
+                        </div>
+                        <div class="upcoming-right-header" >
+                            <p style="text-decoration:underline;cursor:pointer" style="margin-right:9px;" onclick="showEdit('${item.id}')">edit</p>
+                            <p style="text-decoration:underline;cursor:pointer" onclick="deleteTodo('${item.id}')">delete</p>
+                            <img class="copy" src="../image/copy.png" alt="copy button" onclick="copyText('${item.data().task}','${item.data().type}','${toWeekday(itemDate) + ' ' + itemDate.getDate() + ' ' + toMonth(itemDate) + ' ' + itemDate.getFullYear()}','${item.data().detail}')" />
                         </div>
                     </div>
+                    <div class="upcoming-due-date">
+                        <p class="upcoming-task-due-date">Due date : ${toWeekday(itemDate) + ' ' + itemDate.getDate() + ' ' + toMonth(itemDate) + ' ' + itemDate.getFullYear()}</p>
+                    </div>
+                    <div class="upcoming-detail">
+                        <p class="task-detail-title">Detail</p>
+                        <p class="task-detail">${item.data().detail}</p>
+                    </div>      
                 </div>
-                <div class="upcoming-task-due-date">
-                    <label for="due-date">Due date:</label>
-                    <label class = "upcoming-task-due-date">${toWeekday(itemDate) + ' ' + itemDate.getDate() + ' ' + toMonth(itemDate) + ' ' + itemDate.getFullYear()}</label>
-                </div>
-                <div class="upcoming-detail">
-                    <label class="task-detail-title">Detail</label>
-                    <label class="task-detail">${item.data().detail}</label>
-                </div>
-            </div>
                 `;
+                addColorType(`upcoming-${item.id}-type`, item.data().type)
             } else {
                 passed.innerHTML += `
-            <div id="${item.id}" class="passed-todo-info">
-                <div class="passed-header">
-                    <div class="passed-left-header">
-                        <h3>${item.data().task}</h3>
-                        <label class = "task-type">${item.data().type}</label>
-                    </div>
-                    <div class="passed-right-header">
-                        <p id="edit-button" onclick="clickEDIT('${item.id}');">edit</p>
-                        <p id="delete-button" onclick="deleteTodo('${item.id}');">Delete</p>
-                        <div class="copy">
-                            <img class="copy" src="../image/copy.png" onclick="copyTodo('${item.id}')" />
+                <div class="passed-todo-info" id="passed-${item.id}">
+                    <div class="passed-header">
+                        <div class="passed-left-header">
+                            <h3>${item.data().task}</h3>
+                            <p id="passed-${item.id}-type" class="task-type">${item.data().type}</p>
+                        </div>
+                        <div class="passed-right-header" >
+                            <p style="text-decoration:underline;cursor:pointer" onclick="showEdit('${item.id}')">edit</p>
+                            <p style="text-decoration:underline;cursor:pointer" onclick="deleteTodo('${item.id}')">delete</p>
+                            <img class="copy" src="../image/copy.png" alt="copy button" onclick="copyText('${item.data().task}','${item.data().type}','${toWeekday(itemDate) + ' ' + itemDate.getDate() + ' ' + toMonth(itemDate) + ' ' + itemDate.getFullYear()}','${item.data().detail}')"/>
                         </div>
                     </div>
+                    <div class="passed-due-date">
+                        <p style="color:#CB8181" class="passed-task-due-date">Due date : ${toWeekday(itemDate) + ' ' + itemDate.getDate() + ' ' + toMonth(itemDate) + ' ' + itemDate.getFullYear()}</p>
+                    </div>
+                    <div class="passed-detail">
+                        <p class="task-detail-title">Detail</p>
+                        <p class="task-detail">${item.data().detail}</p>
+                    </div>      
                 </div>
-                <div class="passed-task-due-date">
-                    <label for="due-date">Due date:</label>
-                    <label class = "passed-task-due-date">${toWeekday(itemDate) + ' ' + itemDate.getDate() + ' ' + toMonth(itemDate) + ' ' + itemDate.getFullYear()}</label>
-                </div>
-                <div class="passed-detail">
-                    <label class="task-detail-title">Detail</label>
-                    <label class="task-detail">${item.data().detail}</label>
-                </div>
-            </div>
-            `;
+                `;
+                addColorType(`passed-${item.id}-type`, item.data().type)
             }
         });
     }
@@ -145,7 +143,7 @@ async function getItems() {
           `;
     }
 
-    const passedTodoContainer = document.getElementById("passed-todo-container");
+
     if (passed.innerHTML == "") {
         passedTodoContainer.style.display = "none";
     } else {
@@ -175,7 +173,7 @@ async function addTodo() {
             date,
             detail,
         });
-
+        hideForm();
         redrawDOMadd();
         getItems();
     } else {
@@ -183,7 +181,7 @@ async function addTodo() {
     }
 }
 
-async function editTodo(docId) {
+async function updateTodo(docId) {
     console.log("editItem");
 
     if (!checkBlank()) {
@@ -194,7 +192,7 @@ async function editTodo(docId) {
         const date = toDate.getTime();
         const detail = document.getElementById("edit-detail").value;
 
-        const docRef = await doc(db, `tasks/${docId}`);
+        const docRef = await doc(db, `Todos/${docId}`);
         let docInstance = await getDoc(docRef);
         docInstance = docInstance.data();
 
@@ -222,17 +220,23 @@ async function editTodo(docId) {
     }
 }
 
-function copyTodo(id) {
-    console.log('copy!')
-    navigator.clipboard.writeText(document.getElementById(id).innerText)
-        .then(function () {
-            console.log('text has been copied!')
-        })
+function copyText(task, type, date, detail) {
+    console.log("copyText");
+    let value = `
+    ================== Todo List ==================
+    Task : ${task} , ${type}
+    Date : ${date}
+    Detail : ${detail}
+    ============= Have a happy Day!! ==============
+    `
+    console.log(value)
+    // console.log(copy);
+    navigator.clipboard.writeText(value)
 }
 
 async function clickADD() {
     console.log("clickedADD");
-    const inputForm = document.getElementById("input-form");
+
     if (!addIsClicked) {
         hideEdit();
         inputForm.style.display = "flex";
@@ -243,12 +247,10 @@ async function clickADD() {
     }
 }
 
-async function clickEDIT(docId) {
-    const editButton = document.getElementById("edit-todo");
+async function showEdit(docId) {
     console.log("clickedEDIT");
 
-    const editForm = document.getElementById("edit-form");
-    const docRef = await doc(db, `tasks/${docId}`);
+    const docRef = await doc(db, `Todos/${docId}`);
     let docInstance = await getDoc(docRef);
     docInstance = docInstance.data();
 
@@ -270,7 +272,7 @@ async function clickEDIT(docId) {
         document.getElementById("edit-" + docInstance.type).checked = true;
 
         editButton.onclick = function () {
-            editTodo(docId);
+            updateTodo(docId);
         };
         window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
@@ -311,15 +313,17 @@ async function okTodayTask() {
     console.log("clickedOK");
     const todayTask = document.getElementById("today-task-container");
     todayTask.style.display = "none";
+    document.getElementById("line-break-today").style.display = "none";
 }
 
-async function deleteTodo(docId) {
-    console.log("clickedDelete");
-    console.log(docId);
-    alert("Are you sure to delete this task !");
-    const docRef = doc(db, `tasks/${docId}`);
-    await deleteDoc(docRef);
-    getItems();
+async function deleteTodo(id) {
+    if (confirm('Delete Todo from the Todo List?')) {
+        console.log('deleteTodo ' + id);
+        const docRef = doc(db, `Todos/${id}`);
+        await deleteDoc(docRef);
+        getItems();
+    }
+
 }
 
 function redrawDOMadd() {
@@ -401,13 +405,17 @@ function checkBlank() {
     }
 }
 
+function addColorType(id, type) {
+    document.getElementById(id).style.borderColor = borderColor[type];
+}
+
 window.clickADD = clickADD;
-window.clickEDIT = clickEDIT;
+window.showEdit = showEdit;
 window.clickINFO = clickINFO;
 window.hideForm = hideForm;
 window.hideEdit = hideEdit;
 window.addTodo = addTodo;
-window.editTodo = editTodo;
+window.updateTodo = updateTodo;
 window.deleteTodo = deleteTodo;
-window.copyTodo = copyTodo;
+window.copyText = copyText;
 window.okTodayTask = okTodayTask;
