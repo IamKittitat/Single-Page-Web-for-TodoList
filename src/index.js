@@ -55,26 +55,27 @@ async function getItems() {
     passed.innerHTML = "";
     var today = new Date();
 
+    const sortedTodos = sortTodosByDate(items);
+
     if (items) {
-
-        items.docs.map((item) => {
-
-            var itemDate = toDateTime(item.data().date);
+        sortedTodos.map((item) => {
+            // console.log(item);
+            var itemDate = toDateTime(item.date);
             var todayDate = toDateTime(today.getTime());
 
             if (!(itemDate > todayDate) && !(itemDate < todayDate)) {
                 todayTask.innerHTML += `
                 <div class="today-task-info" id="todo-${item.id}">
                     <div class="today-task-header">
-                        <h3 style="font-size:30px;">${item.data().task}</h3>
-                        <p id="today-${item.id}-type" class="task-type">${item.data().type}</p>
+                        <h3 style="font-size:30px;">${item.task}</h3>
+                        <p id="today-${item.id}-type" class="task-type">${item.type}</p>
                     </div>
                     <div class="today-task-due-date">
                         <p>Due date : ${toWeekday(itemDate) + ' ' + itemDate.getDate() + ' ' + toMonth(itemDate) + ' ' + itemDate.getFullYear()}</p>
                     </div>
                 </div>
             `;
-                addColorType(`today-${item.id}-type`, item.data().type)
+                addColorType(`today-${item.id}-type`, item.type)
             }
 
             if (!(itemDate < todayDate)) {
@@ -82,13 +83,13 @@ async function getItems() {
                 <div class="upcoming-todo-info" id="upcoming-${item.id}">
                     <div class="upcoming-header">
                         <div class="upcoming-left-header">
-                            <h3>${item.data().task}</h3>
-                            <p id="upcoming-${item.id}-type" class="task-type">${item.data().type}</p>
+                            <h3>${item.task}</h3>
+                            <p id="upcoming-${item.id}-type" class="task-type">${item.type}</p>
                         </div>
                         <div class="upcoming-right-header" >
                             <p style="text-decoration:underline;cursor:pointer" style="margin-right:9px;" onclick="showEdit('${item.id}')">edit</p>
                             <p style="text-decoration:underline;cursor:pointer" onclick="deleteTodo('${item.id}')">delete</p>
-                            <img class="copy" src="../image/copy.png" alt="copy button" onclick="copyText('${item.data().task}','${item.data().type}','${toWeekday(itemDate) + ' ' + itemDate.getDate() + ' ' + toMonth(itemDate) + ' ' + itemDate.getFullYear()}','${item.data().detail}')" />
+                            <img class="copy" src="../image/copy.png" alt="copy button" onclick="copyText('${item.task}','${item.type}','${toWeekday(itemDate) + ' ' + itemDate.getDate() + ' ' + toMonth(itemDate) + ' ' + itemDate.getFullYear()}','${item.detail}')" />
                         </div>
                     </div>
                     <div class="upcoming-due-date">
@@ -96,23 +97,23 @@ async function getItems() {
                     </div>
                     <div class="upcoming-detail">
                         <p class="task-detail-title">Detail</p>
-                        <p class="task-detail">${item.data().detail}</p>
+                        <p class="task-detail">${item.detail}</p>
                     </div>      
                 </div>
                 `;
-                addColorType(`upcoming-${item.id}-type`, item.data().type)
+                addColorType(`upcoming-${item.id}-type`, item.type)
             } else {
                 passed.innerHTML += `
                 <div class="passed-todo-info" id="passed-${item.id}">
                     <div class="passed-header">
                         <div class="passed-left-header">
-                            <h3>${item.data().task}</h3>
-                            <p id="passed-${item.id}-type" class="task-type">${item.data().type}</p>
+                            <h3>${item.task}</h3>
+                            <p id="passed-${item.id}-type" class="task-type">${item.type}</p>
                         </div>
                         <div class="passed-right-header" >
                             <p style="text-decoration:underline;cursor:pointer" onclick="showEdit('${item.id}')">edit</p>
                             <p style="text-decoration:underline;cursor:pointer" onclick="deleteTodo('${item.id}')">delete</p>
-                            <img class="copy" src="../image/copy.png" alt="copy button" onclick="copyText('${item.data().task}','${item.data().type}','${toWeekday(itemDate) + ' ' + itemDate.getDate() + ' ' + toMonth(itemDate) + ' ' + itemDate.getFullYear()}','${item.data().detail}')"/>
+                            <img class="copy" src="../image/copy.png" alt="copy button" onclick="copyText('${item.task}','${item.type}','${toWeekday(itemDate) + ' ' + itemDate.getDate() + ' ' + toMonth(itemDate) + ' ' + itemDate.getFullYear()}','${item.detail}')"/>
                         </div>
                     </div>
                     <div class="passed-due-date">
@@ -120,11 +121,11 @@ async function getItems() {
                     </div>
                     <div class="passed-detail">
                         <p class="task-detail-title">Detail</p>
-                        <p class="task-detail">${item.data().detail}</p>
+                        <p class="task-detail">${item.detail}</p>
                     </div>      
                 </div>
                 `;
-                addColorType(`passed-${item.id}-type`, item.data().type)
+                addColorType(`passed-${item.id}-type`, item.type)
             }
         });
     }
@@ -258,6 +259,7 @@ async function clickINFO() {
 }
 
 async function showEdit(docId) {
+    console.log(docId);
     console.log("clickedEDIT");
 
     const docRef = await doc(db, `Todos/${docId}`);
@@ -313,7 +315,6 @@ async function hideEdit() {
     editIsClicked = false;
     redrawDOMedit();
 }
-
 
 // ###################################
 
@@ -371,7 +372,6 @@ function checkBlank() {
         if (
             document.getElementById("task").value == "" ||
             document.getElementById("due-date").value == "" ||
-            document.getElementById("detail").value == "" ||
             (document.getElementById("activity-radio").checked == false &&
                 document.getElementById("Meeting-radio").checked == false &&
                 document.getElementById("Exam-radio").checked == false &&
@@ -384,7 +384,6 @@ function checkBlank() {
         if (
             document.getElementById("edit-task").value == "" ||
             document.getElementById("edit-due-date").value == "" ||
-            document.getElementById("edit-detail").value == "" ||
             (document.getElementById("edit-Activity").checked == false &&
                 document.getElementById("edit-Meeting").checked == false &&
                 document.getElementById("edit-Exam").checked == false &&
@@ -412,6 +411,22 @@ function copyText(task, type, date, detail) {
     console.log(value)
     // console.log(copy);
     navigator.clipboard.writeText(value)
+}
+
+function sortTodosByDate(items) {
+    const sortedTodos = [];
+    items.docs.map((item) => {
+        const objItem = {
+            id: item.id,
+            task: item.data().task,
+            date: item.data().date,
+            type: item.data().type,
+            detail: item.data().detail
+        }
+        sortedTodos.push(objItem);
+    })
+    sortedTodos.sort((a, b) => (a.date > b.date) ? 1 : ((b.date > a.date) ? -1 : 0))
+    return sortedTodos
 }
 
 // =======================================================
