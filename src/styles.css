@@ -1,0 +1,401 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap'); 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: poppins;
+    font-weight: normal;
+}
+
+.navbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    height: 5em;
+}
+
+.navbar h1{
+    margin-left: 0.4em;
+    font-size: 70px;
+}
+
+.right-navbar{
+    display: flex;
+    margin-right: 1.4em;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.info{
+    margin-top: 7px;
+}
+
+#info{
+    width: 2em;
+    height: 2em;
+    cursor: pointer;
+}
+
+.add-button{
+    display: flex;
+    flex-direction: row;
+    padding: 15px;
+    background-color: #ABDBE5;
+    border-radius: 20px;
+    margin: 20px;
+    align-items: center;
+    width: 103px;
+    height: 50px;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.add-button img{
+    width:1.2em;
+    height:1.2em;
+    margin-right: 8px;
+}
+
+.add-text p{
+    font-size: 1.4em;
+}
+
+#filter{
+    width: 2em;
+    height: 2em;
+    cursor: pointer;
+}
+
+#group-name{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background-color: #E5E5E5;
+    border: 3px solid black;
+    width: 772px;
+    margin: auto;
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 20px;
+    font-size: 15px;
+    
+}
+
+#input-form, #edit-form{
+    display: flex;
+    background-color: #E5E5E5;
+    width: 772px;
+    height: 364px;
+    border-radius: 20px;
+    margin: auto;
+    margin-top: 13px;
+    padding-left: 23px;
+    flex-direction: column;
+    justify-content: space-around;
+    /* align-items: center; */
+
+}
+
+input[type=text], input[type=date]{
+    border: 2px solid white;
+    background-color: #DDDDDD;
+    border-radius: 15px;
+}
+
+#task::placeholder {
+    padding-left: 40px;
+    margin-left: 40px;
+    color: #8A8A8A;
+}
+
+#task, #edit-task{
+    width: 726px;
+    height: 42px;
+    font-size: 2vw;
+    padding-left: 11px;
+}
+
+.task-name{
+    padding-top: 11px;
+}
+
+.due-date{
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+#due-date, #edit-due-date{
+    width: 135px;
+    height: 33px;
+    font-size: 13px;
+    padding-left: 11px;
+}
+
+.detail{
+    display: flex;
+    flex-direction: column;
+    font-size: 13px;
+    text-decoration:underline;
+}
+
+#detail::placeholder, #edit-detail::placeholder {
+    color: #8A8A8A;
+}
+
+#detail, #edit-detail{
+    width: 726px;
+    height: 179px;
+    margin-top: 7px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 2px solid white;
+    background-color: #DDDDDD;
+    border-radius: 15px;  
+    resize: none;
+}
+
+.input-footer{
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+}
+
+input[type=radio]{
+    visibility: hidden;
+    text-align: center;
+}
+
+.type-selector label{
+    width: 71px;
+    height: 20px;
+    padding: 1px 12px 1px 12px;
+    border-radius: 10px;
+    font-size: 13px;
+    cursor: pointer;   
+}
+
+/* Label and Checked Label */
+
+.activity-label{
+    border: 2px solid #8D5AB5;
+}
+
+.meeting-label{
+    border: 2px solid #4AA3BA;
+}
+
+.exam-label{
+    border: 2px solid #DA5C53;
+}
+
+.deadline-label{
+    border: 2px solid #A8E4B1;
+}
+
+.type-selector input[type=radio]:checked + label {
+    color: white;
+}
+
+.type-selector input[type=radio]:checked + .activity-label {
+    background-color: #8D5AB5;
+}
+
+.type-selector input[type=radio]:checked + .meeting-label {
+    background-color: #4AA3BA;
+}
+
+.type-selector input[type=radio]:checked + .exam-label {
+    background-color: #DA5C53;
+}
+
+.type-selector input[type=radio]:checked + .deadline-label {
+    background-color: #A8E4B1;
+}
+
+/* End Of Label and Checked Label */
+
+.todo-button-container{
+    display: flex;
+    text-align: right;
+    padding-right: 28px;
+    padding-bottom: 5px;
+    margin-top: 20px;
+} 
+
+#add-todo, #edit-todo{
+    width: 56px;
+    height: 28px;
+    border-radius: 20px;
+    border: 3px solid #5CA066;
+    background-color: #DDDDDD;
+    text-align: center;
+    margin-right: 6px;
+
+}
+
+#cancel-add-todo, #cancel-edit-todo{
+    font-size: 13px;
+    color: #8A8A8A;
+    text-decoration: underline;
+    border: none;
+    background-color: #E5E5E5;
+}
+
+
+/* Upcomming and passed */
+
+.upcoming-todo-container, .passed-todo-container, .today-task-container{ /* Big container store upcoming todo and title*/
+    display: flex; 
+    flex-direction: column;
+    margin-top: 12px;
+    text-align: center;
+    justify-content: center;
+}
+
+.upcoming-todo-container h2, .passed-todo-container h2, .today-task-container h2{
+    font-size: 20px;
+    margin-bottom: 13px;
+}
+
+.upcoming-todo, .passed-todo, .today-task{ /* Only todo container */
+    display: flex;
+    justify-content: center;    
+    flex-direction: column;
+    align-items: center;
+}
+
+.upcoming-todo-info,.passed-todo-info{ /*container of each upcoming todo*/
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 1em;
+    background-color: #E5E5E5;
+    border-radius: 13px;
+    width: 772px;
+    height: 146px;
+}
+
+.upcoming-todo-info h3, .passed-todo-info h3, .today-task-info h3{
+    font-size: 30px;
+}
+
+.upcoming-header, .passed-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 772px;
+}
+
+.upcoming-header p, .passed-header p{
+    width: 71px;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+
+.upcoming-left-header, .passed-left-header{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;    
+    padding-left: 23px;
+    padding-top: 11px;
+}
+
+.upcoming-right-header, .passed-right-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin-right: 16px;
+}
+
+.passed-todo-container h2{
+    font-size: 20px;
+    color: #9A1616;
+}
+
+.upcoming-detail, .passed-detail{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.task-detail-title{
+    margin-left: 23px;
+    font-size: 13px;
+    text-decoration: underline;
+    
+}
+
+.task-detail{
+    font-size: 13px;
+    margin-left: 23px;
+}
+
+.copy{
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+/* End of Upcomming and passed */
+
+/* Today Task */
+.today-task-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #E5E5E5;
+    border-radius: 13px;
+    width: 772px;
+    height: 89px;
+    margin-bottom: 16px;
+}
+.today-task-header{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;    
+    padding-left: 23px;
+    padding-top: 11px;
+}
+
+.task-type{
+    width: 71px;
+    height: 25px;
+    border-radius: 10px;
+    margin-left: 5px;
+    padding-bottom: 5px;
+    font-size: 13px;
+    text-align: center;
+    border: 2px solid;
+}
+
+#ok{
+    cursor: pointer;
+    width:54px;
+    height:30px;
+    font-size:15px;
+    color:#2C5D63;
+    background-color: #E5E5E5;
+    text-align: center;
+    border: 2px solid #2C5D63;
+    border-radius: 20px;
+    align-self: center;
+    padding-top: 0.1vw;
+}
+
+.today-task-due-date, .upcoming-task-due-date, .passed-task-due-date{
+    align-self: flex-start;
+    margin-left: 23px;
+    font-size: 13px;
+    text-align: left;
+}
+
+/* End of Today Task */
+
+
+
+
