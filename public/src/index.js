@@ -95,7 +95,7 @@ async function getItems() {
                     <div class="upcoming-due-date">
                         <p class="upcoming-task-due-date">Due date : ${toWeekday(itemDate) + ' ' + itemDate.getDate() + ' ' + toMonth(itemDate) + ' ' + itemDate.getFullYear()}</p>
                     </div>
-                    <div class="upcoming-detail">
+                    <div class="upcoming-detail" style="overflow-y:auto;">
                         <p class="task-detail-title">Detail</p>
                         <p class="task-detail">${item.detail}</p>
                     </div>      
@@ -119,7 +119,7 @@ async function getItems() {
                     <div class="passed-due-date">
                         <p style="color:#CB8181" class="passed-task-due-date">Due date : ${toWeekday(itemDate) + ' ' + itemDate.getDate() + ' ' + toMonth(itemDate) + ' ' + itemDate.getFullYear()}</p>
                     </div>
-                    <div class="passed-detail">
+                    <div class="passed-detail" style="overflow-y:auto;">
                         <p class="task-detail-title">Detail</p>
                         <p class="task-detail">${item.detail}</p>
                     </div>      
